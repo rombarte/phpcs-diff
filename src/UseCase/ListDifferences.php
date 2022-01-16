@@ -16,7 +16,7 @@ class ListDifferences
                 echo $filename . ': ' . $lines . PHP_EOL;
             }
         }
-
+        echo PHP_EOL;
         echo 'Phpcs differences:' . PHP_EOL;
         echo '==================' . PHP_EOL;
 
@@ -28,6 +28,7 @@ class ListDifferences
             }
         }
 
+        echo PHP_EOL;
         echo 'Warnings:' . PHP_EOL;
         echo '=========' . PHP_EOL;
 
@@ -46,5 +47,7 @@ class ListDifferences
                 }
             }
         }
+
+        echo PHP_EOL;
     }
 }

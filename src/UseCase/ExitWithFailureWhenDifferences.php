@@ -26,6 +26,7 @@ class ExitWithFailureWhenDifferences
             }
         }
 
+        echo 'Exit with status code: ' . $statusCode . PHP_EOL;
         exit($statusCode);
     }
 }
