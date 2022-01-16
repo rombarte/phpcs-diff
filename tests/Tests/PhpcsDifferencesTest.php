@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
-use App\Config\AppConfig;
+use App\Config\App;
 use App\PhpcsDifferences;
 use PHPUnit\Framework\TestCase;
 
@@ -38,7 +38,7 @@ class PhpcsDifferencesTest extends TestCase
         Time: 4.54 secs; Memory: 18MB
         DIFF;
 
-        $differences = new PhpcsDifferences(new AppConfig(), $diff);
+        $differences = new PhpcsDifferences(new App(), $diff);
 
         self::assertEquals(
             [
@@ -88,7 +88,7 @@ class PhpcsDifferencesTest extends TestCase
         Time: 1.61 secs; Memory: 8MB
         DIFF;
 
-        $differences = new PhpcsDifferences(new AppConfig(), $diff);
+        $differences = new PhpcsDifferences(new App(), $diff);
 
         self::assertEquals(
             [

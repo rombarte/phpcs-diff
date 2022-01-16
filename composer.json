@@ -9,6 +9,9 @@
     }
   ],
   "require": {},
+  "bin": [
+    "bin/phpcs-diff.php"
+  ],
   "autoload": {
     "psr-4": {
       "App\\": "src/",

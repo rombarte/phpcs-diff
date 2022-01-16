@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App;
 
-use App\Config\AppConfig;
+use App\Config\App;
 
 /**
  * Parse "vendor/bin/phpcs" command output
@@ -12,9 +12,9 @@ use App\Config\AppConfig;
 class PhpcsDifferences
 {
     private string $phpcsDiff;
-    private AppConfig $appConfig;
+    private App $appConfig;
 
-    public function __construct(AppConfig $appConfig, string $phpcsDiff)
+    public function __construct(App $appConfig, string $phpcsDiff)
     {
         $this->appConfig = $appConfig;
         $this->phpcsDiff = $phpcsDiff;
@@ -80,7 +80,7 @@ class PhpcsDifferences
     {
         $line =  trim(substr($line, 6));
 
-        return str_replace($this->appConfig->appPath, '', $line);
+        return str_replace($this->appConfig->getApplicationRootDirectory(), '', $line);
     }
 
     private function isChangeMetaLine(string $line): bool
