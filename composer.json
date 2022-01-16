@@ -1,5 +1,6 @@
 {
   "name": "rombarte/phpcs-diff",
+  "description": "Run phpcs and compare result with last commit changes only.",
   "type": "library",
   "license": "MIT",
   "authors": [
