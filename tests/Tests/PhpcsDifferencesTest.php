@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests;
 
+use App\Config\AppConfig;
 use App\PhpcsDifferences;
 use PHPUnit\Framework\TestCase;
 
@@ -37,20 +38,20 @@ class PhpcsDifferencesTest extends TestCase
         Time: 4.54 secs; Memory: 18MB
         DIFF;
 
-        $differences = new PhpcsDifferences($diff);
+        $differences = new PhpcsDifferences(new AppConfig(), $diff);
 
         self::assertEquals(
             [
-                '/var/www/html/app/Authentication/Service/CredentialManagement.php' => [
+                'app/Authentication/Service/CredentialManagement.php' => [
                     [
-                        'file' => '/var/www/html/app/Authentication/Service/CredentialManagement.php',
+                        'file' => 'app/Authentication/Service/CredentialManagement.php',
                         'from' => 1,
                         'to' => 1
                     ]
                 ],
-                '/var/www/html/app/Blog/Model/Post.php' => [
+                'app/Blog/Model/Post.php' => [
                     [
-                        'file' => '/var/www/html/app/Blog/Model/Post.php',
+                        'file' => 'app/Blog/Model/Post.php',
                         'from' => 1,
                         'to' => 1
                     ]
@@ -87,25 +88,25 @@ class PhpcsDifferencesTest extends TestCase
         Time: 1.61 secs; Memory: 8MB
         DIFF;
 
-        $differences = new PhpcsDifferences($diff);
+        $differences = new PhpcsDifferences(new AppConfig(), $diff);
 
         self::assertEquals(
             [
-                '/var/www/html/src/GitDifferences.php' => [
+                'src/GitDifferences.php' => [
                     [
-                        'file' => '/var/www/html/src/GitDifferences.php',
+                        'file' => 'src/GitDifferences.php',
                         'from' => 1,
-                        'to' => 1
+                        'to' => 1,
                     ],
-                    ['file' => '/var/www/html/src/GitDifferences.php', 'from' => 102, 'to' => 102]
+                    ['file' => 'src/GitDifferences.php', 'from' => 102, 'to' => 102]
                 ],
-                '/var/www/html/src/PhpcsDifferences.php' => [
+                'src/PhpcsDifferences.php' => [
                     [
-                        'file' => '/var/www/html/src/PhpcsDifferences.php',
+                        'file' => 'src/PhpcsDifferences.php',
                         'from' => 1,
-                        'to' => 1
+                        'to' => 1,
                     ],
-                    ['file' => '/var/www/html/src/PhpcsDifferences.php', 'from' => 92, 'to' => 92]
+                    ['file' => 'src/PhpcsDifferences.php', 'from' => 92, 'to' => 92]
                 ],
             ],
             $differences->getDifferences(),

@@ -84,7 +84,7 @@ class GitDifferences
 
     private function extractFilename(string $line): string
     {
-        return trim(substr($line, 4));
+        return trim(substr($line, 6));
     }
 
     private function isChangeMetaLine(string $line): bool

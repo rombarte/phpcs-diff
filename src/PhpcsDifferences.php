@@ -4,15 +4,19 @@ declare(strict_types=1);
 
 namespace App;
 
+use App\Config\AppConfig;
+
 /**
  * Parse "vendor/bin/phpcs" command output
  */
 class PhpcsDifferences
 {
     private string $phpcsDiff;
+    private AppConfig $appConfig;
 
-    public function __construct(string $phpcsDiff)
+    public function __construct(AppConfig $appConfig, string $phpcsDiff)
     {
+        $this->appConfig = $appConfig;
         $this->phpcsDiff = $phpcsDiff;
     }
 
@@ -74,7 +78,9 @@ class PhpcsDifferences
 
     private function extractFilename(string $line): string
     {
-        return trim(substr($line, 6));
+        $line =  trim(substr($line, 6));
+
+        return str_replace($this->appConfig->appPath, '', $line);
     }
 
     private function isChangeMetaLine(string $line): bool

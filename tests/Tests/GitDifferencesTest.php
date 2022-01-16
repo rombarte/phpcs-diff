@@ -36,8 +36,8 @@ class GitDifferencesTest extends TestCase
         $differences = new GitDifferences($diff);
 
         self::assertEquals(
-            ['b/Example.php' => [['file' => 'b/Example.php', 'from' => 1, 'to' => 11]]],
-            $differences->getDifferences()
+            ['Example.php' => [['file' => 'Example.php', 'from' => 1, 'to' => 11]]],
+            $differences->getDifferences(),
         );
     }
 
@@ -56,8 +56,8 @@ class GitDifferencesTest extends TestCase
         $differences = new GitDifferences($diff);
 
         self::assertEquals(
-            ['b/Example.php' => [['file' => 'b/Example.php', 'from' => 5, 'to' => 6]]],
-            $differences->getDifferences()
+            ['Example.php' => [['file' => 'Example.php', 'from' => 5, 'to' => 6]]],
+            $differences->getDifferences(),
         );
     }
 
@@ -93,8 +93,8 @@ class GitDifferencesTest extends TestCase
         $differences = new GitDifferences($diff);
 
         self::assertEquals(
-            ['b/Example.php' => [['file' => 'b/Example.php', 'from' => 9, 'to' => 9]]],
-            $differences->getDifferences()
+            ['Example.php' => [['file' => 'Example.php', 'from' => 9, 'to' => 9]]],
+            $differences->getDifferences(),
         );
     }
 
@@ -117,9 +117,9 @@ class GitDifferencesTest extends TestCase
 
         self::assertEquals(
             [
-                'b/Example.php' => [
-                    ['file' => 'b/Example.php', 'from' => 7, 'to' => 7],
-                    ['file' => 'b/Example.php', 'from' => 9, 'to' => 9]
+                'Example.php' => [
+                    ['file' => 'Example.php', 'from' => 7, 'to' => 7],
+                    ['file' => 'Example.php', 'from' => 9, 'to' => 9],
                 ]
             ],
             $differences->getDifferences(),
@@ -153,8 +153,8 @@ class GitDifferencesTest extends TestCase
 
         self::assertEquals(
             [
-                'b/Example.php' => [['file' => 'b/Example.php', 'from' => 11, 'to' => 12]],
-                'b/index.php' => [['file' => 'b/index.php', 'from' => 1, 'to' => 3]]
+                'Example.php' => [['file' => 'Example.php', 'from' => 11, 'to' => 12]],
+                'index.php' => [['file' => 'index.php', 'from' => 1, 'to' => 3]],
             ],
             $differences->getDifferences(),
         );
