@@ -15,7 +15,7 @@ class ListDifferences
         $this->config = $config;
     }
 
-    public function run()
+    public function run(): void
     {
         $gitDiff = `git diff --unified=0 --minimal -b HEAD^...` ?? '';
         $phpcsDiff = `vendor/bin/phpcs` ?? '';
@@ -42,5 +42,29 @@ class ListDifferences
                 echo $filename . ' : ' . $line . PHP_EOL;
             }
         }
+
+        echo 'Warnings:' . PHP_EOL;
+
+        $code = 0;
+
+        foreach ($phpcsDifferences as $filename => $items) {
+            foreach ($items as $item) {
+                $diff = $gitDifferences[$filename] ?? [];
+
+                if (!$diff) {
+                    continue;
+                }
+
+                $warn = $item['from'] > $diff['from'] && $item['from'] < $diff['to'];
+
+                if ($warn) {
+                    $code = 1;
+                }
+
+                echo $filename . ' : ' . $warn ? 'warning' : 'out of scope';
+            }
+        }
+
+        exit($code);
     }
 }
