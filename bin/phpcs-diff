@@ -12,6 +12,18 @@ $applicationRootPath = getcwd() . '/';
 $config = new Config\App($applicationRootPath);
 
 $gitDiff = `git diff --unified=0 --minimal -b HEAD^...` ?? '';
+
+if (!`git --version`) {
+    echo 'Git is not installed properly.' . PHP_EOL;
+    exit(1);
+}
+
+if (!`vendor/bin/phpcs --version`) {
+    echo 'Phpcs is not installed properly.' . PHP_EOL;
+    exit(1);
+}
+
+$gitDiff = `git diff --unified=0 --minimal -b HEAD^...` ?? '';
 $phpcsDiff = `vendor/bin/phpcs` ?? '';
 
 $gitDifferences = (new GitDifferences($gitDiff))->getDifferences();
