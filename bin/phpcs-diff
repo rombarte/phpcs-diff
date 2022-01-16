@@ -1,13 +1,21 @@
 #!/usr/bin/env php
 <?php
 
-use App\UseCase;
 use App\Config;
+use App\GitDifferences;
+use App\PhpcsDifferences;
+use App\UseCase;
 
 require 'vendor/autoload.php';
 
 $applicationRootPath = getcwd() . '/';
-
 $config = new Config\App($applicationRootPath);
 
-(new UseCase\ListDifferences($config))->run();
+$gitDiff = `git diff --unified=0 --minimal -b HEAD^...` ?? '';
+$phpcsDiff = `vendor/bin/phpcs` ?? '';
+
+$gitDifferences = (new GitDifferences($gitDiff))->getDifferences();
+$phpcsDifferences = (new PhpcsDifferences($config, $phpcsDiff))->getDifferences();
+
+(new UseCase\ListDifferences())->run($gitDifferences, $phpcsDifferences);
+(new UseCase\ExitWithFailureWhenDifferences())->run($gitDifferences, $phpcsDifferences);
