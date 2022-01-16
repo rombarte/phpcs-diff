@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Config\AppConfig;
+
 class AppFacade
 {
     public static function run()
@@ -9,15 +11,26 @@ class AppFacade
         $gitDiff = `git diff --unified=0 --minimal -b` ?? '';
         $phpcsDiff = `vendor/bin/phpcs` ?? '';
 
-        $a = (new GitDifferences($gitDiff))->getDifferences();
-        $b = (new PhpcsDifferences($phpcsDiff))->getDifferences();
+        $gitDifferences = (new GitDifferences($gitDiff))->getDifferences();
+        $phpcsDifferences = (new PhpcsDifferences(new AppConfig(), $phpcsDiff))->getDifferences();
 
-        foreach ($b as $k => $item) {
-            foreach ($item as $k2 => $item2) {
-                $file = $k;
-                $line = $item2['from'];
+        echo 'Git' . PHP_EOL;
 
-                echo $k . ' ' . $line . PHP_EOL;
+        foreach ($gitDifferences as $filename => $items) {
+            foreach ($items as $item) {
+                $line = $item['from'] . '->' . $item['to'] ;
+
+                echo $filename . ' ' . $line . PHP_EOL;
+            }
+        }
+
+        echo 'Phpcs' . PHP_EOL;
+
+        foreach ($phpcsDifferences as $filename => $items) {
+            foreach ($items as $item) {
+                $line = $item['from'] ;
+
+                echo $filename . ' ' . $line . PHP_EOL;
             }
         }
     }
