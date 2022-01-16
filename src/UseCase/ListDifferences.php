@@ -62,7 +62,7 @@ class ListDifferences
                         $code = 1;
                     }
 
-                    echo $filename . ' : ' . ($warn ? 'warning' : 'out of scope');
+                    echo $filename . ' : ' . ($warn ? 'warning' : 'out of scope') . PHP_EOL;
                 }
             }
         }
