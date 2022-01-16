@@ -10,7 +10,7 @@
   ],
   "require": {},
   "bin": [
-    "bin/phpcs-diff.php"
+    "bin/phpcs-diff"
   ],
   "autoload": {
     "psr-4": {
