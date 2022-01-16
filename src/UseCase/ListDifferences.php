@@ -55,13 +55,15 @@ class ListDifferences
                     continue;
                 }
 
-                $warn = $item['from'] > $diff['from'] && $item['from'] < $diff['to'];
+                foreach ($diff as $value) {
+                    $warn = $item['from'] > $value['from'] && $item['from'] < $value['to'];
 
-                if ($warn) {
-                    $code = 1;
+                    if ($warn) {
+                        $code = 1;
+                    }
+
+                    echo $filename . ' : ' . $warn ? 'warning' : 'out of scope';
                 }
-
-                echo $filename . ' : ' . $warn ? 'warning' : 'out of scope';
             }
         }
 
